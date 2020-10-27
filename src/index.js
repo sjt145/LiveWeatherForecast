@@ -2,12 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Main from './containers/main'
 import reportWebVitals from './reportWebVitals';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import {liveweather} from './store/reducers/index'
+const rootReducers = combineReducers({
+  weatherState: liveweather,
+});
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
+  <Provider store={store}>
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+   <Main/>
+  </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

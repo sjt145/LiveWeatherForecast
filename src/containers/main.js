@@ -9,7 +9,7 @@ const Main = () => {
 
     const getWeatherValues = () => {
         navigator.geolocation.getCurrentPosition(success => {
-            console.log(success.coords.latitude, success.coords.longitude)
+            console.log(success)
             dispatch(getWeather(success.coords.latitude, success.coords.longitude))
         });
     }
